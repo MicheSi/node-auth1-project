@@ -12,10 +12,10 @@ function find() {
         .select('id', 'username', 'password');
 }
 
-function findBy(username) {
+function findBy(filter) {
     return db('users')
         .select('id', 'username', 'password')
-        .where(username);
+        .where(filter);
 }
 
 function findById(id) {
