@@ -6,4 +6,8 @@ const server = express();
 
 server.use('/api', apiRouter);
 
+server.get('/', (req, res) => {
+    res.send('Server is running')
+})
+
 module.exports = server;
