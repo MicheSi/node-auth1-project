@@ -2,17 +2,27 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const session = require('express-session');
+const knexStore = require('connect-session-knex')(session);
+
+const knex = require('../data/dbConfig');
 
 const sessionConfig = {
   name: 'saywhat',
   secret: 'Mums the word',
+  resave: false,
+  saveUninitialized: true,
   cookie: {
-    maxAge: 1 * 24 * 60 * 1000 * 7,
+    maxAge: 24 * 60 * 60 * 1000,
     secure: false,
     httpOnly: true,
   },
-  resave: false,
-  saveUninitialized: true,
+  store: new knexStore({
+    knex,
+    tablename: 'knexsession',
+    createTable: true,
+    sidfieldname: 'sid',
+    clearInterval: 2 * 24 * 60 * 60 * 1000
+  })
 }
 
 module.exports = server => {

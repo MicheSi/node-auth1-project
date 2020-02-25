@@ -14,15 +14,19 @@ const RegisterForm = props => {
             ...user,
             [e.target.name]: e.target.value
         })
+        console.log(user)
     }
 
     const register = user => {
-        AxiosWithAuth()
-            .post('/auth/register', user)
+        axios
+            .post('http://localhost:5000/api/auth/register', user)
             .then(res => {
                 console.log(res.data, user)
+                setUser(user)
+                window.location.href = '/login'
             })
     }
+
     return (
         <div className='registerForm'>
             <h2>Register a New User</h2>
