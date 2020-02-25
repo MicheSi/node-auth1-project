@@ -3,7 +3,8 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import RegisterForm from './components/register';
 import LoginForm from './components/login';
-import Users from './components/users';
+import UsersList from './components/usersList';
+import PrivateRoute from './utils/PrivateRoute';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
@@ -18,7 +19,7 @@ function App() {
         <h1>Node Auth-Users Project</h1>
         <Route exact path='/' component={RegisterForm} />
         <Route exact path='/login' component={LoginForm} />
-        <Route exact path='/users' component={Users} />
+        <PrivateRoute exact path='/users' component={UsersList} />
       </div>
     </Router>
   );

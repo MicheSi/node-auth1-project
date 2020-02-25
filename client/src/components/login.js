@@ -1,9 +1,14 @@
 import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import axios from 'axios';
+import AxiosWithAuth from '../utils/AxiosWithAuth';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+
+axios.defaults.withCredentials = true;
 
 const LoginForm = props => {
     const [user, setUser] = useState({username: '', password: ''});
+    const history = useHistory();
 
     const handleChange = e => {
         console.log(e.target.name, e.target.value)
@@ -14,15 +19,20 @@ const LoginForm = props => {
         console.log(user)
     }
 
-    const login = user => {
-        axios
-            .post('http://localhost:5000/api/auth/login', user)
+    const login = e => {
+        e.preventDefault();
+        setUser({...user})
+        AxiosWithAuth()
+            .post('/auth/login', user)
             .then(res => {
                 console.log(res.data, user)
-                setUser(user)
-                window.location.href = '/users'
+                localStorage.setItem('token', res.data.payload)
+                props.history.push('/users');
+                setUser({username: '', password: ''})
             })
+            .catch(err => console.log('cannot log in', err))
     }
+
     return (
         <div className='registerForm'>
             <h2>Log In</h2>
