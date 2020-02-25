@@ -8,7 +8,7 @@ const sessionConfig = {
   secret: 'Mums the word',
   cookie: {
     maxAge: 1 * 24 * 60 * 1000 * 7,
-    secure: true,
+    secure: false,
     httpOnly: true,
   },
   resave: false,
