@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import AxiosWithAuth from '../utils/AxiosWithAuth';
+import {Button} from 'reactstrap';
 import Users from './users';
 
 const UsersList = props => {
@@ -17,8 +18,15 @@ const UsersList = props => {
         })
     }, [])
 
+    const logout = e => {
+        e.preventDefault();
+        localStorage.clear();
+        window.location.href='/login'
+    }
+
     return (
         <div className='userList'>
+            <Button onClick={logout}>Log out</Button>
             {users.map(user => (
                 <Users
                  key={user.id}
