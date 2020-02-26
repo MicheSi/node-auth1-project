@@ -26,8 +26,8 @@ const LoginForm = props => {
             .post('/auth/login', user)
             .then(res => {
                 console.log(res.data, user)
-                localStorage.setItem('token', res.data.payload)
-                props.history.push('/users');
+                localStorage.setItem('token', res.data.token)
+                history.push('/users');
                 setUser({username: '', password: ''})
             })
             .catch(err => console.log('cannot log in', err))
