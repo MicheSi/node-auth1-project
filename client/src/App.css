@@ -19,3 +19,9 @@ html, body {
   padding: 2% 3%;
   margin-top: 4%;
 }
+
+.userList Button {
+  position: absolute;
+  right: 100px;
+  top: 55px;
+}

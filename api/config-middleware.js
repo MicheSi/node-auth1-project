@@ -6,6 +6,11 @@ const knexStore = require('connect-session-knex')(session);
 
 const knex = require('../data/dbConfig');
 
+const config = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+}
+
 const sessionConfig = {
   name: 'saywhat',
   secret: 'Mums the word',
@@ -28,6 +33,6 @@ const sessionConfig = {
 module.exports = server => {
   server.use(helmet());
   server.use(express.json());
-  server.use(cors());
+  server.use(cors(config));
   server.use(session(sessionConfig));
 };

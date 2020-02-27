@@ -1,20 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import AxiosWithAuth from '../utils/AxiosWithAuth';
+import React from 'react';
 
 const Users = props => {
-    const [users, setUsers] = useState([]);
-
-    useEffect(() => {
-        AxiosWithAuth()
-        .get('/users')
-        .then(res => {
-            console.log(res.data)
-        })
-    }, [])
-
     return (
-        <div className='userList'>
-
+        <div className='user'>
+            <h2>Username: {props.username}</h2>
+            <p>Password: {props.password}</p>
         </div>
     )
 }
